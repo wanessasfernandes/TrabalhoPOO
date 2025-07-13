@@ -1,37 +1,23 @@
-#include "Pessoa.h"
+#ifndef MAQUINA_H
+#define MAQUINA_H
+
 #include <iostream>
+#include "elemento.h"
 
 using namespace std;
-
-Pessoa::Pessoa(int id,string NOME, float salar)
+class Maquina : public elemento
 {
-	ID = id;
-	nome = NOME;
-	salario = salar;
-}
+	public:
+		
+		Maquina(int IP,string Name, bool atividade);
+		~Maquina();
+		bool getatividade();
+		string getnome();
+		void apresentar();
+		void alterar_atividade();
+	protected:
+		string nome;
+		bool ativo;
+};
 
-
-void Pessoa::deposito(float acressimo){
-	salario = salario+acressimo;
-}
-
-void Pessoa::saque(float decressimo){
-	salario = salario-decressimo;
-}
-
-float Pessoa::getSalario(){
-	return salario;
-}
-
-string Pessoa::getNome(){
-	return nome;
-}
-
-void Pessoa::apresentar(){
-	cout << "Prazer meu nome e: " << getNome() << "ID: " << getID() << "Ganho: " << getSalario() << endl;
-}
-
-
-Pessoa::~Pessoa()
-{
-}
+#endif

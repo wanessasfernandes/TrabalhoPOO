@@ -5,7 +5,7 @@
 
 class ListaNaoOrdenada {
 private:
-    Elemento** elementos;
+    elemento** elementos;
     int capacidade;
     int tamanho;
 
@@ -13,14 +13,20 @@ public:
     ListaNaoOrdenada(int capacidade = 100);
     ~ListaNaoOrdenada();
 
-    bool InserirNoInicio(Elemento* e);       // O(n)
-    bool InserirNoFinal(Elemento* e);        // O(1)
-    bool RemoverPrimeiro();                  // O(n)
-    bool RemoverUltimo();                    // O(1)
-    bool RemoverPeloId(int id);              // O(n)
-    int BuscarPeloId(int id) const;          // O(n)
-    bool AlterarPeloId(int id, Elemento* novo); // O(n)
-    void Imprimir() const;
+    bool InserirNoInicio(elemento* e);
+    bool InserirNoFinal(elemento* e);
+    bool RemoverPrimeiro();
+    bool RemoverUltimo();
+    bool RemoverPeloId(int id);
+    elemento* BuscarPeloId(int id);
+    bool AlterarPeloId(int id, elemento* novo);
+    void Imprimir();
+    
+    // Métodos novos
+    bool EstaCheia() const;
+    bool EstaVazia() const;
+    int GetTamanho() const;
+    int GetCapacidade() const;
 };
 
 #endif

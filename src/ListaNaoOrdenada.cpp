@@ -5,7 +5,7 @@ using namespace std;
 ListaNaoOrdenada::ListaNaoOrdenada(int capacidade) {
     this->capacidade = capacidade;
     this->tamanho = 0;
-    this->elementos = new Elemento*[capacidade];
+    this->elementos = new elemento*[capacidade]();
 }
 
 ListaNaoOrdenada::~ListaNaoOrdenada() {
@@ -14,8 +14,11 @@ ListaNaoOrdenada::~ListaNaoOrdenada() {
     delete[] elementos;
 }
 
-bool ListaNaoOrdenada::InserirNoInicio(Elemento* e) {
-    if (tamanho >= capacidade) return false;
+bool ListaNaoOrdenada::InserirNoInicio(elemento* e) {
+    if (tamanho >= capacidade) {
+        cout << "Erro: lista cheia.\n";
+        return false;
+    }
     for (int i = tamanho; i > 0; --i)
         elementos[i] = elementos[i - 1];
     elementos[0] = e;
@@ -23,14 +26,20 @@ bool ListaNaoOrdenada::InserirNoInicio(Elemento* e) {
     return true;
 }
 
-bool ListaNaoOrdenada::InserirNoFinal(Elemento* e) {
-    if (tamanho >= capacidade) return false;
+bool ListaNaoOrdenada::InserirNoFinal(elemento* e) {
+    if (tamanho >= capacidade) {
+        cout << "Erro: lista cheia.\n";
+        return false;
+    }
     elementos[tamanho++] = e;
     return true;
 }
 
 bool ListaNaoOrdenada::RemoverPrimeiro() {
-    if (tamanho == 0) return false;
+    if (tamanho == 0) {
+        cout << "Erro: lista vazia.\n";
+        return false;
+    }
     delete elementos[0];
     for (int i = 1; i < tamanho; ++i)
         elementos[i - 1] = elementos[i];
@@ -39,35 +48,77 @@ bool ListaNaoOrdenada::RemoverPrimeiro() {
 }
 
 bool ListaNaoOrdenada::RemoverUltimo() {
-    if (tamanho == 0) return false;
+    if (tamanho == 0) {
+        cout << "Erro: lista vazia.\n";
+        return false;
+    }
     delete elementos[--tamanho];
     return true;
 }
 
 bool ListaNaoOrdenada::RemoverPeloId(int id) {
-    int pos = BuscarPeloId(id);
-    if (pos == -1) return false;
-    delete elementos[pos];
-    for (int i = pos + 1; i < tamanho; ++i)
-        elementos[i - 1] = elementos[i];
-    tamanho--;
-    return true;
+    for (int i = 0; i < tamanho; ++i) {
+        if (elementos[i]->getID() == id) {
+            delete elementos[i];
+            for (int j = i + 1; j < tamanho; ++j)
+                elementos[j - 1] = elementos[j];
+            tamanho--;
+            return true;
+        }
+    }
+    cout << "Erro: ID não encontrado.\n";
+    return false;
 }
 
-int ListaNaoOrdenada::BuscarPeloId(int id) const {
+elemento* ListaNaoOrdenada::BuscarPeloId(int id) {
     for (int i = 0; i < tamanho; ++i) {
         if (elementos[i]->getID() == id)
-            return i;
+            return elementos[i];
     }
-    return -1;
+    return nullptr;
 }
 
-bool ListaNaoOrdenada::AlterarPeloId(int id, Elemento* novo) {
-    int pos = BuscarPeloId(id);
-    if (pos == -1) return false;
-    delete elementos[pos];
-    elementos[pos] = novo;
-    return true;
+bool ListaNaoOrdenada::AlterarPeloId(int id, elemento* novo) {
+    if (novo == nullptr || novo->getID() != id) {
+        cout << "Erro: novo elemento inválido.\n";
+        return false;
+    }
+
+    for (int i = 0; i < tamanho; ++i) {
+        if (elementos[i]->getID() == id) {
+            delete elementos[i];
+            elementos[i] = novo;
+            return true;
+        }
+    }
+    
+    cout << "Erro: ID não encontrado.\n";
+    return false;
 }
 
-v
+void ListaNaoOrdenada::Imprimir() {
+    if (tamanho == 0) {
+        cout << "Lista vazia.\n";
+        return;
+    }
+    
+    for (int i = 0; i < tamanho; ++i) {
+        elementos[i]->apresentar();
+    }
+}
+
+bool ListaNaoOrdenada::EstaCheia() const {
+    return tamanho >= capacidade;
+}
+
+bool ListaNaoOrdenada::EstaVazia() const {
+    return tamanho == 0;
+}
+
+int ListaNaoOrdenada::GetTamanho() const {
+    return tamanho;
+}
+
+int ListaNaoOrdenada::GetCapacidade() const {
+    return capacidade;
+}
