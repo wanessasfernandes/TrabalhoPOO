@@ -126,7 +126,7 @@ Essa análise permitiu compreender os impactos das decisões de implementação 
 
 ---
 
-## 6. Menbros
+## 6. Membros
 
 - **Gabriel Rodrigues Saar**
 - **Maria Eduarda**
