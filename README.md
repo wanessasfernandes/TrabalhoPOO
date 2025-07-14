@@ -132,7 +132,7 @@ Essa análise permitiu compreender os impactos das decisões de implementação 
 - **Gabriel Rodrigues Saar**
 - **João Pedro Cabral**
 - **Marcelo Amaral**
-- **Maria Eduarda**
+- **Maria Eduarda Bonan**
 - **Wanessa Fernandes**
 
 
