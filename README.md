@@ -128,9 +128,11 @@ Essa análise permitiu compreender os impactos das decisões de implementação 
 
 ## 6. Membros
 
-- **Gabriel Rodrigues Saar**
-- **Maria Eduarda**
-- **Wanessa Fernandes**
 - **David Rabelo Gabri**
+- **Gabriel Rodrigues Saar**
 - **João Pedro Cabral**
 - **Marcelo Amaral**
+- **Maria Eduarda**
+- **Wanessa Fernandes**
+
+
